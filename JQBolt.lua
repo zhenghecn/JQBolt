@@ -426,28 +426,42 @@
 			return fn.attachlistener("OnVisibleChange", funcname, ispushback);
 		end
 
-		fn.position = function (ulnewleft, ulnewtop, ulnewright, ulnewbottom )
+		fn.position = function (newleft, newtop, newwidth, newheight )
 			local obj = self.element[1];
 			if nil ~= obj then
-				if nil == ulnewleft or nil == ulnewtop or nil == ulnewright or nil == ulnewbottom then
-					return obj:GetObjPos();
+				if nil == newleft or nil == newtop or nil == newwidth or nil == newheight then
+					local oldleft, oldtop, oldright, oldbottom = obj:GetObjPos();
+					return oldleft, oldtop, oldright - oldleft, oldbottom - oldtop;
 				else
-					obj:SetObjPos2(ulnewleft, ulnewtop, ulnewright - ulnewleft, ulnewbottom - ulnewtop);
+					obj:SetObjPos2(newleft, newtop, newwidth, newheight);
 				end
 			end
 
 			return fn;
 		end
 		
-		fn.left = function ( ulleft )
-			if nil == ulleft then
-				local uloldleft, uloldtop, uloldright, uloldbottom = fn.position();
-				return uloldleft;
+		fn.positionexp = function (newleft, newtop, newwidth, newheight )
+			local obj = self.element[1];
+			if nil ~= obj then
+				if nil == newleft or nil == newtop or nil == newwidth or nil == newheight then
+					return obj:GetObjPosExp();
+				else
+					obj:SetObjPos2(newleft, newtop, newwidth, newheight);
+				end
+			end
+
+			return fn;
+		end
+		
+		fn.left = function ( left )
+			if nil == left then
+				local oldleft = fn.position();
+				return oldleft;
 			else
 				fn.each( 
 					function ( elem )
-						local uloldleft, uloldtop, uloldright, uloldbottom = elem:GetObjPos();
-						elem:SetObjPos2(ulleft, uloldtop, uloldright-uloldleft, uloldbottom-uloldtop);
+						local oldleft, oldtop, oldright, oldbottom = elem:GetObjPos();
+						elem:SetObjPos2(left, oldtop, oldright-oldleft, oldbottom-oldtop);
 					end
 				);	
 			end
@@ -455,15 +469,31 @@
 			return fn;
 		end
 		
-		fn.top = function ( ultop )
-			if nil == ultop then
-				local uloldleft, uloldtop, uloldright, uloldbottom = fn.position();
-				return uloldtop;
+		fn.leftexp = function ( left )
+			if nil == left then
+				local oldleft = fn.positionexp();
+				return oldleft;
 			else
 				fn.each( 
 					function ( elem )
-						local uloldleft, uloldtop, uloldright, uloldbottom = elem:GetObjPos();
-						elem:SetObjPos2(uloldleft, ultop, uloldright-uloldleft, uloldbottom-uloldtop);
+						local oldleft, oldtop, oldwidth, oldheight = elem:GetObjPosExp();
+						elem:SetObjPos2(left, oldtop, oldwidth, oldheight);
+					end
+				);	
+			end
+
+			return fn;
+		end
+		
+		fn.top = function ( top )
+			if nil == top then
+				local oldleft, oldtop = fn.position();
+				return oldtop;
+			else
+				fn.each( 
+					function ( elem )
+						local oldleft, oldtop, oldright, oldbottom = elem:GetObjPos();
+						elem:SetObjPos2(oldleft, top, oldright-oldleft, oldbottom-oldtop);
 					end
 				);	
 			end
@@ -471,15 +501,31 @@
 			return fn;
 		end
 		
-		fn.right = function ( ulright )
-			if nil == ulright then
-				local uloldleft, uloldtop, uloldright, uloldbottom = fn.position();
-				return uloldright;
+		fn.topexp = function ( top )
+			if nil == top then
+				local oldleft, oldtop = fn.positionexp();
+				return oldtop;
 			else
 				fn.each( 
 					function ( elem )
-						local uloldleft, uloldtop, uloldright, uloldbottom = elem:GetObjPos();
-						elem:SetObjPos2(ulright - (uloldright-uloldleft), uloldtop, uloldright-uloldleft, uloldbottom-uloldtop);
+						local oldleft, oldtop, oldwidth, oldheight = elem:GetObjPosExp();
+						elem:SetObjPos2(oldleft, top, oldwidth, oldheight);
+					end
+				);	
+			end
+			
+			return fn;
+		end
+		
+		fn.right = function ( right )
+			if nil == right then
+				local oldleft, oldtop, oldright = fn.position();
+				return oldright;
+			else
+				fn.each( 
+					function ( elem )
+						local oldleft, oldtop, oldright, oldbottom = elem:GetObjPos();
+						elem:SetObjPos2(right - (oldright-oldleft), oldtop, oldright-oldleft, oldbottom-oldtop);
 					end
 				);
 			end
@@ -487,15 +533,15 @@
 			return fn;
 		end
 		
-		fn.bottom = function ( ulbottom )
-			if nil == ulbottom then
-				local uloldleft, uloldtop, uloldright, uloldbottom = fn.position();
-				return uloldbottom;
+		fn.rightexp = function ( right )
+			if nil == right then
+				local oldleft, oldtop, oldwidth = fn.positionexp();
+				return "(" .. oldleft .. ") + (" .. oldwidth .. ")";
 			else
 				fn.each( 
 					function ( elem )
-						local uloldleft, uloldtop, uloldright, uloldbottom = elem:GetObjPos();
-						elem:SetObjPos2(uloldleft, ulbottom-(uloldbottom-uloldtop) , uloldright-uloldleft, uloldbottom-uloldtop);
+						local oldleft, oldtop, oldwidth, oldheight = elem:GetObjPosExp();
+						elem:SetObjPos2(right .. "-(" .. oldwidth .. ")", oldtop, oldwidth, oldheight);
 					end
 				);
 			end
@@ -503,15 +549,15 @@
 			return fn;
 		end
 		
-		fn.width = function ( ulwidth )
-			if nil == ulwidth then
-				local uloldleft, uloldtop, uloldright, uloldbottom = fn.position();
-				return uloldright - uloldleft;
+		fn.bottom = function ( bottom )
+			if nil == bottom then
+				local oldleft, oldtop, oldright, oldbottom = fn.position();
+				return oldbottom;
 			else
 				fn.each( 
 					function ( elem )
-						local uloldleft, uloldtop, uloldright, uloldbottom = elem:GetObjPos();
-						elem:SetObjPos2(uloldleft, uloldtop, ulwidth, uloldbottom-uloldtop);
+						local oldleft, oldtop, oldright, oldbottom = elem:GetObjPos();
+						elem:SetObjPos2(oldleft, bottom-(oldbottom-oldtop) , oldright-oldleft, oldbottom-oldtop);
 					end
 				);
 			end
@@ -519,15 +565,79 @@
 			return fn;
 		end
 		
-		fn.height = function ( ulheight )
-			if nil == ulheight then
-				local uloldleft, uloldtop, uloldright, uloldbottom = fn.position();
-				return uloldbottom - uloldtop;
+		fn.bottomexp = function ( bottom )
+			if nil == bottom then
+				local oldleft, oldtop, oldwidth, oldheight = fn.positionexp();
+				return "(" .. oldtop .. ") + (" .. oldheight .. ")";
 			else
 				fn.each( 
 					function ( elem )
-						local uloldleft, uloldtop, uloldright, uloldbottom = elem:GetObjPos();
-						elem:SetObjPos2(uloldleft, uloldtop, uloldright-uloldleft, ulheight);
+						local oldleft, oldtop, oldwidth, oldheight = elem:GetObjPosExp();
+						elem:SetObjPos2(oldleft, bottom .. "-(" .. oldheight .. ")" , oldwidth, oldheight);
+					end
+				);
+			end
+			
+			return fn;
+		end
+		
+		fn.width = function ( width )
+			if nil == width then
+				local oldleft, oldtop, oldright, oldbottom = fn.position();
+				return oldright - oldleft;
+			else
+				fn.each( 
+					function ( elem )
+						local oldleft, oldtop, oldright, oldbottom = elem:GetObjPos();
+						elem:SetObjPos2(oldleft, oldtop, width, oldbottom-oldtop);
+					end
+				);
+			end
+			
+			return fn;
+		end
+		
+		fn.widthexp = function ( width )
+			if nil == width then
+				local oldleft, oldtop, oldwidth, oldheight = fn.positionexp();
+				return oldwidth;
+			else
+				fn.each( 
+					function ( elem )
+						local oldleft, oldtop, oldwidth, oldheight = elem:GetObjPosExp();
+						elem:SetObjPos2(oldleft, oldtop, width, oldheight);
+					end
+				);
+			end
+			
+			return fn;
+		end
+		
+		fn.height = function ( height )
+			if nil == height then
+				local oldleft, oldtop, oldright, oldbottom = fn.position();
+				return oldbottom - oldtop;
+			else
+				fn.each( 
+					function ( elem )
+						local oldleft, oldtop, oldright, oldbottom = elem:GetObjPos();
+						elem:SetObjPos2(oldleft, oldtop, oldright-oldleft, height);
+					end
+				);
+			end
+			
+			return fn;
+		end
+		
+		fn.heightexp = function ( height )
+			if nil == height then
+				local oldleft, oldtop, oldwidth, oldheight = fn.positionexp();
+				return oldheight;
+			else
+				fn.each( 
+					function ( elem )
+						local oldleft, oldtop, oldwidth, oldheight = elem:GetObjPosExp();
+						elem:SetObjPos2(oldleft, oldtop, oldwidth, height);
 					end
 				);
 			end
