@@ -18,7 +18,11 @@ function OnInitControl(self)
 	local function onClickIcon()
 		XLMessageBox("Don't touch me!")
 	end
-	jqbolt("#icon2", self).position(45, 165, 45+70, 165+70).onlbuttondown(onClickIcon);
+	jqbolt("#icon2", self).position(45, 165, 70, 70).onlbuttondown(onClickIcon);
+	--jqbolt("#icon2", self).leftexp("father.width/2")
+	--jqbolt("#icon2", self).rightexp("father.width")
+	--jqbolt("#icon2", self).widthexp("father.width/10")
+	--jqbolt("#icon2", self).positionexp("father.width/2", "father.height/2", 70, 70).onlbuttondown(onClickIcon);
 	-- newIcon:SetObjPos(45,165,45+70,165+70)
 	-- newIcon:AttachListener("OnLButtonDown",true,onClickIcon)
 
