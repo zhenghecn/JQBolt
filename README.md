@@ -58,13 +58,49 @@ JQBolt 是一款基于 迅雷Bolt界面引擎 的Lua框架，其设计借鉴了 
     jqbolt("#button"，self).left(100);	--set
 	jqbolt("#button"，self).left();		--get
 	jqbolt("#button"，self).right();
+	jqbolt("#button"，self).top();
+	jqbolt("#button"，self).bottom();
 	jqbolt("#button"，self).height();
 	jqbolt("#button"，self).width();
 	jqbolt("#button"，self).offset(10,-10);
+	jqbolt("#button"，self).position(10,10,100,100);		--left,top,width,height
+
+全部位置函数拥有对应的支持表达式的API：
+
+	jqbolt("#button"，self).leftexp("father.width/2");	--set
+	jqbolt("#button"，self).leftexp();					--get
+	jqbolt("#button"，self).rightexp("width");
+	jqbolt("#button"，self).topexp();
+	jqbolt("#button"，self).bottomexp("father.height");
+	jqbolt("#button"，self).heightexp("father.height/2");
+	jqbolt("#button"，self).widthexp();
+	jqbolt("#button"，self).positionexp();
+
+如保持对象位置的动态性，应连续使用exp的位置函数，否则会破坏对象位置的动态性。
 
 ### 动画效果 ###
 
 封装原有的动画API，操作更简单
+
+	一行调用，实现全部动画
+	jqbolt("#icon", self).alphachange(700, 255, 0).poschange(700, 45, 100, 45+60, 100+60, 45-30, 100-30, 45+60+30, 100+60+30);
+	
+	-- local aniFactory = XLGetObject("Xunlei.UIEngine.AnimationFactory")
+	-- local owner = self:GetOwner();
+	-- local icon = owner:GetUIObject("icon");
+	-- local alphaAni = aniFactory:CreateAnimation("AlphaChangeAnimation")
+	-- alphaAni:SetTotalTime(700)
+	-- alphaAni:SetKeyFrameAlpha(255,0)
+	-- alphaAni:BindRenderObj(icon) 
+	-- owner:AddAnimation(alphaAni)
+	-- alphaAni:Resume()
+
+	-- local posAni = aniFactory:CreateAnimation("PosChangeAnimation")
+	-- posAni:SetTotalTime(700)
+	-- posAni:SetKeyFrameRect(45,100,45+60,100+60,45-30,100-30,45+60+30,100+60+30)
+	-- posAni:BindLayoutObj(icon)
+	-- owner:AddAnimation(posAni)
+	-- posAni:Resume()
 
 # 项目目标 #
 
