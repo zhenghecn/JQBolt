@@ -1,11 +1,11 @@
 --lua文件必须是UTF-8编码的(最好无BOM头)
 function SetState(self,newState) 		
 		local attr = self:GetAttribute()
-		
+
 		if newState ~= attr.NowState then
 			local ownerTree = self:GetOwner()
-			local oldBkg = self:GetControlObject("oldBkg")
-			local bkg = self:GetControlObject("bkg")
+			local oldBkg = jqbolt("#oldBkg", self).get(1)
+			local bkg = jqbolt("#bkg", self).get(1)
 			
 			oldBkg:SetTextureID(bkg:GetTextureID())
 			oldBkg:SetAlpha(255)
@@ -19,21 +19,20 @@ function SetState(self,newState)
 				bkg:SetTextureID(attr.HoverBkgID)
 			end
 
-			
-			local aniFactory = XLGetObject("Xunlei.UIEngine.AnimationFactory")	
-			local aniAlpha = aniFactory:CreateAnimation("AlphaChangeAnimation")
-			aniAlpha:BindRenderObj(oldBkg)
-			aniAlpha:SetTotalTime(500)
-			aniAlpha:SetKeyFrameAlpha(255,0)
-			ownerTree:AddAnimation(aniAlpha)
-			aniAlpha:Resume()
+			jqbolt("#oldBkg", self).alphachange(500,255,0)
+			-- local aniFactory = XLGetObject("Xunlei.UIEngine.AnimationFactory")	
+			-- local aniAlpha = aniFactory:CreateAnimation("AlphaChangeAnimation")
+			-- aniAlpha:BindRenderObj(oldBkg)
+			-- aniAlpha:SetTotalTime(500)
+			-- aniAlpha:SetKeyFrameAlpha(255,0)
+			-- ownerTree:AddAnimation(aniAlpha)
+			-- aniAlpha:Resume()
 			attr.NowState = newState
 		end
 end
 
 function SetText(self,newText)
-	local textObj = self:GetControlObject("text")
-	textObj:SetText(newText)
+	jqbolt("#text", self).get(1):SetText(newText)
 end
 
 function OnLButtonDown(self)
@@ -75,6 +74,6 @@ function OnBind(self)
 	local attr = self:GetAttribute()
 	self:SetText(attr.Text)
 	attr.NowState=0
-	local bkg = self:GetControlObject("bkg")
-	bkg:SetTextureID(attr.NormalBkgID)
+	--local bkg = self:GetControlObject("bkg")
+	jqbolt("#bkg", self).get(1):SetTextureID(attr.NormalBkgID)
 end
