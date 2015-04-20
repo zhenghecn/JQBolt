@@ -1,5 +1,9 @@
 # 发布日志 #
 
+## 2015.4.20 ##
+- 增加在Bolt控件内使用的支持；
+- 修改HelloBolt7的Button控件，演示如何在控件内使用JQBolt；
+
 ## 2015.4.10 ##
 - 位置函数增加支持表达式的对应接口：leftexp、rightexp、topexp、bottomexp、widthexp、heightexp；
 - 修改postion函数，使用更为常用的 left、top、width、height 四个参数；
