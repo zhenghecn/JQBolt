@@ -13,9 +13,9 @@
 	jqbolt = function ( selector , context )
 
 		local fn = { selector = selector, context = context };
-		local self = { element = {}, findtable = {} };
+		local self = { element = {}, findtable = {}, iscontrol = context:IsControl() };
 		
-		fn.init = function ( selector, context )
+		fn.init = function ( selector, context )		
 			if type(selector) == "userdata" and selector["GetClass"] ~= nil then
 				self.element[1] = selector;
 				return fn;
@@ -23,7 +23,12 @@
 
 			if type(selector) == "string" then
 				if nil ~= string.find(selector, "^#%w+$") then
-					local elem = context:GetObject("tree:" .. string.sub(selector, 2));
+					local elem = nil;
+					if self.iscontrol then	
+						elem = context:GetControlObject(string.sub(selector, 2));
+					else
+						elem = context:GetObject("tree:" .. string.sub(selector, 2));
+					end
 					if elem then
 						self.element[1] = elem;
 						return fn;
@@ -39,7 +44,12 @@
 		self.findtable["#%w+"] = 
 		function ( m, context)
 			if fn.size() == 0 then
-				local elem = context:GetObject("tree:" .. string.sub(m, 2));
+				local elem = nil;
+				if self.iscontrol then	
+					elem = context:GetControlObject(string.sub(m, 2));
+				else
+					elem = context:GetObject("tree:" .. string.sub(m, 2));
+				end
 				if elem then
 					self.element[1] = elem;
 				end
