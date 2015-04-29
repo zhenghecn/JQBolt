@@ -9,6 +9,12 @@ JQBolt 是一款基于 迅雷Bolt界面引擎 的Lua框架，其设计借鉴了 
 - 功能：文档对象选择、链式调用、事件绑定的前后端分离、全局数据存取封装、位置快捷设置、动画效果
 
 # 快速入门 #
+### 引用简单，不对原有代码产生影响 ###
+
+在onload.lua文件中，引入其他Lua文件前加入一行代码即可引用JQBolt：
+	
+	XLLoadModule(root.."/JQBolt.lua")
+
 ### 文档对象选择 ###
 
 目前支持以#ID开头的文档对象选择方式：
@@ -28,6 +34,17 @@ JQBolt 是一款基于 迅雷Bolt界面引擎 的Lua框架，其设计借鉴了 
 选择兄弟对象
 
     jqbolt("#button ~ LayoutObject"，self).size();
+
+多种形式的:选择
+
+    jqbolt("#button ~ LayoutObject:even"，self).size();   匹配所有索引值为偶数的元素
+    jqbolt("#button ~ LayoutObject:odd"，self).size();    匹配所有索引值为奇数的元素
+	jqbolt("#button ~ LayoutObject:gt(1)"，self).size();  匹配所有大于给定索引值的元素
+	jqbolt("#button ~ LayoutObject:lt(5)"，self).size();  匹配所有小于给定索引值的元素
+	jqbolt("#button ~ LayoutObject:eq(1)"，self).size();  匹配一个给定索引值的元素
+	jqbolt("#button ~ LayoutObject:hidden"，self).size();   匹配所有不可见元素
+	jqbolt("#button ~ LayoutObject:visible"，self).size();  匹配所有可见元素
+	
 
 ### 链式调用 ###
 

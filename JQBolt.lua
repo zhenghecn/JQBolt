@@ -41,7 +41,7 @@
 			return fn;
 		end
 
-		self.findtable["#%w+"] = 
+		self.findtable[#self.findtable+1] = { key = "#%w+" , func =
 		function ( m, context)
 			if fn.size() == 0 then
 				local elem = nil;
@@ -64,9 +64,73 @@
 				);
 				self.element = elemtable;
 			end
-		end 
+		end };
+		
+		self.findtable[#self.findtable+1] = { key = "first" , func = 
+		function ( m, context)
+			fn.first();
+		end };
+		
+		self.findtable[#self.findtable+1] = { key = "last" , func = 
+		function ( m, context)
+			fn.last();
+		end };
+		
+		self.findtable[#self.findtable+1] = { key = "even" , func = 
+		function ( m, context)
+			fn.even();
+		end };
+		
+		self.findtable[#self.findtable+1] = { key = "odd" , func = 
+		function ( m, context)
+			fn.odd();
+		end };
+		
+		self.findtable[#self.findtable+1] = { key = "gt%(%d+%)" , func = 
+		function ( m, context)
+			local index = tonumber(string.sub(m, 4, -2));
+			fn.gt(index)
+		end };
+		
+		self.findtable[#self.findtable+1] = { key = "lt%(%d+%)" , func = 
+		function ( m, context)
+			local index = tonumber(string.sub(m, 4, -2));
+			fn.lt(index)
+		end };
+		
+		self.findtable[#self.findtable+1] = { key = "eq%(%-*%d+%)" , func = 
+		function ( m, context)
+			local index = tonumber(string.sub(m, 4, -2));
+			fn.eq(index)
+		end };
+		
+		self.findtable[#self.findtable+1] = { key = "hidden" , func = 
+		function ( m, context)
+			local elemtable = {};
+			fn.each( 
+				function ( elem )
+					if elem:GetVisible() == false then
+						elemtable[#elemtable+1] = elem;
+					end
+				end
+			);
+			self.element = elemtable;
+		end };
+		
+		self.findtable[#self.findtable+1] = { key = "visible" , func = 
+		function ( m, context)
+			local elemtable = {};
+			fn.each( 
+				function ( elem )
+					if elem:GetVisible() == true then
+						elemtable[#elemtable+1] = elem;
+					end
+				end
+			);
+			self.element = elemtable;
+		end };
 
-		self.findtable["%w+"] = 
+		self.findtable[#self.findtable+1] = { key = "%w+" , func = 
 		function ( m, context)
 			local elemtable = {};
 			fn.each( 
@@ -77,9 +141,9 @@
 				end
 			);
 			self.element = elemtable;
-		end
+		end };
 		
-		self.findtable[">"] = 
+		self.findtable[#self.findtable+1] = { key = ">", func = 
 		function ( m, context)
 			local elemtable = {};
 			fn.each( 
@@ -91,9 +155,9 @@
 				end
 			);
 			self.element = elemtable;
-		end
+		end };
 		
-		self.findtable["~"] = 
+		self.findtable[#self.findtable+1] = { key = "~" , func = 
 		function ( m, context)
 			local elemtable = {};
 			fn.each( 
@@ -111,18 +175,18 @@
 				end
 			);
 			self.element = elemtable;
-		end
+		end };
 		
-		self.findtable["%*"] = 
+		self.findtable[#self.findtable+1] = { key = "%*" , func = 
 		function ( m, context)	
 			
-		end
+		end };
 		
 		fn.find = function ( selector, context )
-			for m in string.gmatch(selector, "[^%s]+") do
-				for key, func in pairs(self.findtable) do
-					if string.find(m, key) then
-						func( m, context);
+			for m in string.gmatch(selector, "[^%s:]+") do
+				for i = 1,#self.findtable do
+					if string.find(m, self.findtable[i].key) then
+						self.findtable[i].func( m, context);
 						break;
 					end
 				end
@@ -166,7 +230,7 @@
 			if index > 0 then
 				self.element = { self.element[index]};
 			else
-				index = fn.size() - index + 1; 
+				index = fn.size() + index + 1; 
 				self.element = { self.element[index]};
 			end
 			
@@ -181,6 +245,50 @@
 		
 		fn.last = function () 
 			self.element = { self.element[fn.size()]};
+
+			return fn;
+		end
+		
+		fn.even = function ()
+			local elemtable = {};
+			for i = 1, #self.element do
+				if i % 2 == 0  then
+					table.insert(elemtable, self.element[i])
+				end
+			end
+			self.element = elemtable;
+
+			return fn;
+		end
+		
+		fn.odd = function ()
+			local elemtable = {};
+			for i = 1, #self.element do
+				if i % 2 == 1  then
+					table.insert(elemtable, self.element[i])
+				end
+			end
+			self.element = elemtable;
+
+			return fn;
+		end
+		
+		fn.gt = function (index)
+			local elemtable = {};
+			for i = index + 1, #self.element do
+				table.insert(elemtable, self.element[i])
+			end
+			self.element = elemtable;
+
+			return fn;
+		end
+		
+		fn.lt = function (index)
+			local elemtable = {};
+			for i = 1, index - 1 do
+				table.insert(elemtable, self.element[i])
+			end
+			self.element = elemtable;
 
 			return fn;
 		end

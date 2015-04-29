@@ -1,5 +1,11 @@
 # 发布日志 #
 
+## 2015.4.29 ##
+- 增加选择器："first"、"last"、"even"、"odd"、"gt()"、"lt()"、"eq()"、"hidden"、"visible";
+- 增加相应的选择器函数：even、odd、gt、lt；
+- 修复eq函数参数为负数时的Bug；
+- 修改HelloBolt7，新增1~6数字UI对象，方便测试新选择器；
+
 ## 2015.4.20 ##
 - 增加在Bolt控件内使用的支持；
 - 修改HelloBolt7的Button控件，演示如何在控件内使用JQBolt；

@@ -1,10 +1,16 @@
 --lua文件必须是UTF-8编码的(最好无BOM头)
 
 function OnInitControl(self)
+	jqbolt("#number > *:lt(3)", self).hide().toggle().size()
+	--jqbolt("#number > *:gt(3)", self).hide()
+	--jqbolt("#number > *:even", self).hide()
+	--jqbolt("#number > *:odd", self).hide()
+	--jqbolt("#number > *:hidden", self).hide()
+	--jqbolt("#number > *:visible", self).hide()
 
 	jqbolt("#msg", self).onmousemove(MSG_OnMouseMove).onmouseleave(MSG_OnMouseLeave);
 	jqbolt("#close.btn", self).onlbuttondown(close_btn_OnLButtonDown);
-	jqbolt("#userdefine.btn", self).attachlistener("OnClick", userdefine_btn_OnClick);
+	jqbolt("#userdefine.btn", self).attachlistener("OnClick", userdefine_btn_OnClick);	
 
 	local objTree = self:GetOwner()
 	
