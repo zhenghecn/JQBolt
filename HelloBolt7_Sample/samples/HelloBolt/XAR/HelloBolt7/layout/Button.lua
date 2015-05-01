@@ -32,7 +32,7 @@ function SetState(self,newState)
 end
 
 function SetText(self,newText)
-	jqbolt("#text", self).get(1):SetText(newText)
+	jqbolt("#text", self).SetText(newText)
 end
 
 function OnLButtonDown(self)
@@ -75,5 +75,5 @@ function OnBind(self)
 	self:SetText(attr.Text)
 	attr.NowState=0
 	--local bkg = self:GetControlObject("bkg")
-	jqbolt("#bkg", self).get(1):SetTextureID(attr.NormalBkgID)
+	jqbolt("#bkg", self).SetTextureID(attr.NormalBkgID)
 end

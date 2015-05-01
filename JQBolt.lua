@@ -15,7 +15,7 @@
 		local fn = { selector = selector, context = context };
 		local self = { element = {}, findtable = {}, iscontrol = context:IsControl() };
 		
-		fn.init = function ( selector, context )		
+		self.init = function ( selector, context )		
 			if type(selector) == "userdata" and selector["GetClass"] ~= nil then
 				self.element[1] = selector;
 				return fn;
@@ -1017,7 +1017,24 @@
 			return fn;
 		end
 		
-		return fn.init( selector, context );
+		setmetatable(fn, {__index = function(t, k)
+			return function(...)
+				local ret = nil
+				t.each(
+					function ( elem )
+						ret = { elem[k](elem, unpack(arg)) };
+					end
+				);
+				
+				if ret then
+					return unpack(ret);
+				else
+					return t;
+				end
+			end
+		end});
+		
+		return self.init( selector, context );
 	end
 
 	rawset(_G, "jqbolt", jqbolt);

@@ -1,5 +1,9 @@
 # 发布日志 #
 
+## 2015.5.1 ##
+- 基于Lua元表机制，实现对Bolt原生API的直接调用；
+- 将init初始化函数隐藏为私有函数；
+
 ## 2015.4.29 ##
 - 增加选择器："first"、"last"、"even"、"odd"、"gt()"、"lt()"、"eq()"、"hidden"、"visible";
 - 增加相应的选择器函数：even、odd、gt、lt；

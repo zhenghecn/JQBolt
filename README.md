@@ -48,9 +48,14 @@ JQBolt 是一款基于 迅雷Bolt界面引擎 的Lua框架，其设计借鉴了 
 
 ### 链式调用 ###
 
-大部分API都支持链式调用，使得编写的代码更加简单并且性能更好：
+无返回值API都支持链式调用，使得编写的代码更加简单并且性能更好：
 
     jqbolt("#button"，self).eq(1).data("key","value").size();
+
+支持对Bolt原生API的直接、混合调用：
+
+	jqbolt("#button > *", self).show().SetText(“hello”);
+	local left,top,right,bottom = jqbolt("#button > *", self).GetObjPos();
 
 ### 事件绑定的前后端分离 ###
 
