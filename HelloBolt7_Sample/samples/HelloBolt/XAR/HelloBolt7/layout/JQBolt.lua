@@ -12,6 +12,8 @@
 
 	jqbolt = function ( selector , context )
 
+		selector = string.gsub( selector, "^%s*(.-)%s*$", "%1" );
+		
 		local fn = { selector = selector, context = context };
 		local self = { element = {}, findtable = {}, iscontrol = context:IsControl() };
 		
@@ -40,8 +42,36 @@
 
 			return fn;
 		end
+		
+		self.unique = function ()
+			local i = 1;
+			while i < #self.element do
+			  local j = i + 1
+			  while j <= #self.element do
+				if self.element[i]:GetHandle() == self.element[j]:GetHandle() then
+				  table.remove(self.element, j)
+				else
+				  j = j + 1
+				end
+			  end
+			  i = i + 1
+			end
+		end
+		
+		self.tokenize = function ( selector, context )
+			local tags = {};
+			local rcombinators = {};
+			for m in string.gmatch(selector, "#*[%w_%*%(%)%.]+") do
+				tags[#tags + 1] = m;
+			end
+			for m in string.gmatch(selector, "[%s>~:]+") do
+				rcombinators[#rcombinators + 1] = m;
+			end
+			
+			return tags, rcombinators;
+		end
 
-		self.findtable[#self.findtable+1] = { key = "#%w+" , func =
+		self.findtable[#self.findtable+1] = { key = "#[%w_%.]+" , func =
 		function ( m, context)
 			if fn.size() == 0 then
 				local elem = nil;
@@ -145,36 +175,22 @@
 		
 		self.findtable[#self.findtable+1] = { key = ">", func = 
 		function ( m, context)
-			local elemtable = {};
-			fn.each( 
-				function ( elem )
-					local count = elem:GetChildCount();
-					for j = 0, count do
-						elemtable[#elemtable+1] = elem:GetChildByIndex(j);
-					end
-				end
-			);
-			self.element = elemtable;
+			fn.children();
 		end };
 		
 		self.findtable[#self.findtable+1] = { key = "~" , func = 
 		function ( m, context)
-			local elemtable = {};
-			fn.each( 
-				function ( elem )
-					local parent = elem:GetParent();
-					if parent ~= nil then
-						local count = parent:GetChildCount();
-						for j = 0, count do
-							local siblings = parent:GetChildByIndex(j);
-							if siblings ~= nil and siblings:GetHandle() ~= elem:GetHandle() then
-								elemtable[#elemtable+1] = siblings;
-							end
-						end
-					end
-				end
-			);
-			self.element = elemtable;
+			fn.siblings();
+		end };
+		
+		self.findtable[#self.findtable+1] = { key = "^%s+$" , func = 
+		function ( m, context)
+			fn.descendant();
+		end };
+		
+		self.findtable[#self.findtable+1] = { key = ":" , func = 
+		function ( m, context)	
+			
 		end };
 		
 		self.findtable[#self.findtable+1] = { key = "%*" , func = 
@@ -183,10 +199,22 @@
 		end };
 		
 		fn.find = function ( selector, context )
-			for m in string.gmatch(selector, "[^%s:]+") do
-				for i = 1,#self.findtable do
-					if string.find(m, self.findtable[i].key) then
-						self.findtable[i].func( m, context);
+			local tags, rcombinators = self.tokenize(selector);
+			for i = 1, #tags do
+				for j = 1,#self.findtable do
+					if string.find(tags[i], self.findtable[j].key) then
+						self.findtable[j].func( tags[i], context );
+						break;
+					end
+				end
+				
+				if rcombinators[i] == nil or fn.size() == 0 then
+					break;
+				end
+				
+				for j = 1,#self.findtable do
+					if string.find(rcombinators[i], self.findtable[j].key) then
+						self.findtable[j].func( rcombinators[i], context );
 						break;
 					end
 				end
@@ -194,8 +222,8 @@
 				if fn.size() == 0 then
 					break;
 				end
-			end 
-
+			end
+			
 			return fn;
 		end
 		
@@ -290,6 +318,91 @@
 			end
 			self.element = elemtable;
 
+			return fn;
+		end
+		
+		fn.children = function ()
+			local elemtable = {};
+			fn.each( 
+				function ( elem )
+					local count = elem:GetChildCount();
+					for j = 0, count do
+						elemtable[#elemtable+1] = elem:GetChildByIndex(j);
+					end
+				end
+			);
+			self.element = elemtable;
+			
+			self.unique();
+		
+			return fn;
+		end
+		
+		fn.siblings = function ()
+			local elemtable = {};
+			fn.each( 
+				function ( elem )
+					local parent = elem:GetParent();
+					if parent ~= nil then
+						local count = parent:GetChildCount();
+						for j = 0, count do
+							local siblings = parent:GetChildByIndex(j);
+							if siblings ~= nil and siblings:GetHandle() ~= elem:GetHandle() then
+								elemtable[#elemtable+1] = siblings;
+							end
+						end
+					end
+				end
+			);
+			self.element = elemtable;
+			
+			self.unique();
+			
+			return fn;
+		end
+		
+		fn.descendant = function ()
+			local elemtable = {};
+			
+			local function find_descendant ( elem, array )
+				if elem then
+					local count = elem:GetChildCount();
+					for j = 0, count do
+						local child = elem:GetChildByIndex(j);
+						if child then
+							array[#array + 1] = child;
+							find_descendant(child, array);
+						end
+					end
+				end
+			end
+			
+			fn.each( 
+				function ( elem )
+					find_descendant( elem, elemtable );
+				end
+			);
+			self.element = elemtable;
+			
+			self.unique();
+			
+			return fn;
+		end
+		
+		fn.parent = function ()
+			local elemtable = {};
+			fn.each( 
+				function ( elem )
+					local parent = elem:GetParent();
+					if parent ~= nil then
+						elemtable[#elemtable+1] = parent;
+					end
+				end
+			);
+			self.element = elemtable;
+			
+			self.unique();
+			
 			return fn;
 		end
 		

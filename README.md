@@ -27,6 +27,10 @@ JQBolt 是一款基于 迅雷Bolt界面引擎 的Lua框架，其设计借鉴了 
 
     jqbolt("#button > *"，self).size();
 
+选择后代对象
+
+    jqbolt("#button *"，self).size();
+
 根据类型选择子对象
 
     jqbolt("#button > LayoutObject"，self).size();

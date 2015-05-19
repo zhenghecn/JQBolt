@@ -1,12 +1,15 @@
 --lua文件必须是UTF-8编码的(最好无BOM头)
 
 function OnInitControl(self)
-	jqbolt("#number > *:lt(3)", self).show().SetText(2);
-	local left,top,right,bottom = jqbolt("#number > *:lt(3)", self).GetObjPos();
+	--jqbolt("#number > *:lt(3)", self).show().SetText(2);
+	--local left,top,right,bottom = jqbolt("#number > *:lt(3)", self).GetObjPos();
 
+	jqbolt("#descendant > TextObject", self).siblings().hide()
+	--jqbolt("#descendant LayoutObject LayoutObject TextObject", self).SetText(20)
+	--jqbolt("#descendant TextObject", self).SetText(20)
 	--jqbolt("#number > *:gt(3)", self).hide()
 	--jqbolt("#number > *:even", self).hide()
-	--jqbolt("#number > *:odd", self).hide()
+	--jqbolt("#number > TextObject:odd", self).hide()
 	--jqbolt("#number > *:hidden", self).hide()
 	--jqbolt("#number > *:visible", self).hide()
 

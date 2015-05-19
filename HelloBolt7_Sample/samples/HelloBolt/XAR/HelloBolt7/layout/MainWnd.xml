@@ -90,6 +90,71 @@
 						<drawmode>1</drawmode>
 					</attr>
 				</obj>
+				<obj id="descendant" class="LayoutObject">
+					<attr>
+						<left>45</left>
+						<top>10</top>
+						<width>300</width>
+						<height>60</height>
+					</attr>
+					<children>
+						<obj class="LayoutObject">
+							<attr>
+								<left>0</left>
+								<top>0</top>
+								<width>father.width</width>
+								<height>father.height</height>
+							</attr>
+							<children>
+							<obj class="TextObject">
+								<attr>
+									<left>0</left>
+									<top>0</top>
+									<width>20</width>
+									<height>60</height>
+									<font>default.font</font>
+									<halign>center</halign>
+									<valign>center</valign>
+									<text>2</text>
+								</attr>
+							</obj>
+							<obj class="LayoutObject">
+								<attr>
+									<left>40</left>
+									<top>0</top>
+									<width>20</width>
+									<height>60</height>
+								</attr>
+								<children>
+									<obj class="TextObject">
+										<attr>
+											<left>0</left>
+											<top>0</top>
+											<width>20</width>
+											<height>60</height>
+											<halign>center</halign>
+											<valign>center</valign>
+											<text>3</text>
+										</attr>
+									</obj>
+								</children>
+							</obj>
+							</children>
+						</obj>
+						<obj class="TextObject">
+							<attr>
+								<left>20</left>
+								<top>0</top>
+								<width>20</width>
+								<height>60</height>
+								<font>default.font</font>
+								<halign>center</halign>
+								<valign>center</valign>
+								<text>1</text>
+							</attr>
+						</obj>
+					</children>
+				</obj>
 				<obj id="number" class="LayoutObject">
 					<attr>
 						<left>45</left>
