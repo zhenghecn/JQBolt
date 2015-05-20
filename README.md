@@ -19,78 +19,9 @@ JQBolt 是一款基于 迅雷Bolt界面引擎 的Lua框架，其设计借鉴了 
 
 目前支持以#ID开头的文档对象选择方式：
 	
-<table width=”650″ border=”0″ cellspacing=”0″ cellpadding=”0″>
-	<tr>
-		<td>选择器</td>
-		<td>概述</td>
-		<td>示例</td>
-	</tr＞
-	<tr>
-		<td>#</td>
-		<td>根据对象ID选择</td>
-		<td>jqbolt("#button", self)</td>
-	</tr＞
-	<tr>
-		<td>></td>
-		<td>选择子对象</td>
-		<td>jqbolt("#button > *"，self)</td>
-	</tr＞
-	<tr>
-		<td>空格</td>
-		<td>选择后代对象</td>
-		<td>jqbolt("#button *"，self)</td>
-	</tr＞
-	<tr>
-		<td>~</td>
-		<td>选择兄弟对象</td>
-		<td>jqbolt("#button ~ LayoutObject"，self)</td>
-	</tr＞
-	<tr>
-		<td>Bolt对象类名</td>
-		<td>根据类型匹配对象</td>
-		<td>jqbolt("#button > LayoutObject"，self)</td>
-	</tr＞
-	<tr>
-		<td>*</td>
-		<td>匹配所有类型对象</td>
-		<td>jqbolt("#button > *"，self)</td>
-	</tr＞
-	<tr>
-		<td>:even</td>
-		<td>匹配所有索引值为偶数的元素</td>
-		<td>jqbolt("#button ~ LayoutObject:even"，self)</td>
-	</tr＞
-	<tr>
-		<td>:odd</td>
-		<td>匹配所有索引值为奇数的元素</td>
-		<td>jqbolt("#button ~ LayoutObject:odd"，self)</td>
-	</tr＞
-	<tr>
-		<td>:gt</td>
-		<td>匹配所有大于给定索引值的元素</td>
-		<td>jqbolt("#button ~ LayoutObject:gt(1)"，self)</td>
-	</tr＞
-	<tr>
-		<td>:lt</td>
-		<td>匹配所有小于给定索引值的元素</td>
-		<td>jqbolt("#button ~ LayoutObject:lt(5)"，self)</td>
-	</tr＞
-	<tr>
-		<td>:eq</td>
-		<td>匹配一个给定索引值的元素</td>
-		<td>jqbolt("#button ~ LayoutObject:eq(1)"，self)</td>
-	</tr＞
-	<tr>
-		<td>:hidden</td>
-		<td>匹配所有不可见元素</td>
-		<td>jqbolt("#button ~ LayoutObject:hidden"，self)</td>
-	</tr＞
-	<tr>
-		<td>:visible</td>
-		<td>匹配所有可见元素</td>
-		<td>jqbolt("#button ~ LayoutObject:visible"，self)</td>
-	</tr＞
-</table>
+| 选择器 |   概述 |   示例  | 
+|---------|--------|--------|
+| #</td> |   根据对象ID选择 |   jqbolt("#button", self)  | 
 
 ### 链式调用 ###
 
