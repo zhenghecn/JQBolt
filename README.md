@@ -54,164 +54,7 @@ JQBolt 是一款基于 迅雷Bolt界面引擎 的Lua框架，其设计借鉴了 
 		do more
 	end);
 
-<table width=”650″ border=”0″ cellspacing=”0″ cellpadding=”0″>
-	<tr>
-		<td>JQBolt API</td>
-		<td>Bolt API</td>
-	</tr＞
-	<tr>
-		<td>onabsposchange</td>
-		<td>OnAbsPosChange</td>
-	</tr＞
-	<tr>
-		<td>onbind</td>
-		<td>OnBind</td>
-	</tr＞
-	<tr>
-		<td>oncapturechange</td>
-		<td>OnCaptureChange</td>
-	</tr＞
-	<tr>
-		<td>onchar</td>
-		<td>OnChar</td>
-	</tr＞
-	<tr>
-		<td>oncontrolfocuschange</td>
-		<td>OnControlFocusChange</td>
-	</tr＞
-	<tr>
-		<td>oncontrolmouseenter</td>
-		<td>OnControlMouseEnter</td>
-	</tr＞
-	<tr>
-		<td>oncontrolmouseleave</td>
-		<td>OnControlMouseLeave</td>
-	</tr＞
-	<tr>
-		<td>oncontrolmousewheel</td>
-		<td>OnControlMouseWheel</td>
-	</tr＞
-	<tr>
-		<td>ondestroy</td>
-		<td>OnDestroy</td>
-	</tr＞
-	<tr>
-		<td>ondragenter</td>
-		<td>OnDragEnter</td>
-	</tr＞
-	<tr>
-		<td>ondragleave</td>
-		<td>OnDragLeave</td>
-	</tr＞	
-	<tr>
-		<td>ondragover</td>
-		<td>OnDragOver</td>
-	</tr＞	
-	<tr>
-		<td>ondragquery</td>
-		<td>OnDragQuery</td>
-	</tr＞
-	<tr>
-		<td>ondrop</td>
-		<td>OnDrop</td>
-	</tr＞	
-	<tr>
-		<td>onenablechange</td>
-		<td>OnEnableChange</td>
-	</tr＞
-	<tr>
-		<td>onfocuschange</td>
-		<td>OnFocusChange</td>
-	</tr＞	
-	<tr>
-		<td>onhittest</td>
-		<td>OnHitTest</td>
-	</tr＞	
-	<tr>
-		<td>onhotkey</td>
-		<td>OnHotKey</td>
-	</tr＞	
-	<tr>
-		<td>oninitcontrol</td>
-		<td>OnInitControl</td>
-	</tr＞	
-	<tr>
-		<td>onkeydown</td>
-		<td>OnKeyDown</td>
-	</tr＞	
-	<tr>
-		<td>onkeyup</td>
-		<td>OnKeyUp</td>
-	</tr＞	
-	<tr>
-		<td>onlbuttondbclick</td>
-		<td>OnLButtonDbClick</td>
-	</tr＞	
-	<tr>
-		<td>onlbuttondown</td>
-		<td>OnLButtonDown</td>
-	</tr＞	
-	<tr>
-		<td>onlbuttonup</td>
-		<td>OnLButtonUp</td>
-	</tr＞	
-	<tr>
-		<td>onmbuttondbclick</td>
-		<td>OnMButtonDbClick</td>
-	</tr＞	
-	<tr>
-		<td>onmbuttondown</td>
-		<td>OnMButtonDown</td>
-	</tr＞	
-	<tr>
-		<td>onmbuttonup</td>
-		<td>OnMButtonUp</td>
-	</tr＞
-	<tr>
-		<td>onmouseenter</td>
-		<td>OnMouseEnter</td>
-	</tr＞
-	<tr>
-		<td>onmousehover</td>
-		<td>OnMouseHover</td>
-	</tr＞
-	<tr>
-		<td>onmouseleave</td>
-		<td>OnMouseLeave</td>
-	</tr＞
-	<tr>
-		<td>onmousemove</td>
-		<td>OnMouseMove</td>
-	</tr＞
-	<tr>
-		<td>onmousewheel</td>
-		<td>OnMouseWheel</td>
-	</tr＞
-	<tr>
-		<td>onposchange</td>
-		<td>OnPosChange</td>
-	</tr＞
-	<tr>
-		<td>onrbuttondbclick</td>
-		<td>OnRButtonDbClick</td>
-	</tr＞
-	<tr>
-		<td>onrbuttondown</td>
-		<td>OnRButtonDown</td>
-	</tr＞
-	<tr>
-		<td>onrbuttonup</td>
-		<td>OnRButtonUp</td>
-	</tr＞
-	<tr>
-		<td>ontabbed</td>
-		<td>OnTabbed</td>
-	</tr＞
-	<tr>
-		<td>onvisiblechange</td>
-		<td>OnVisibleChange</td>
-	</tr＞
-</table>
+
 
 ### 全局数据存取封装 ###
 
@@ -255,36 +98,14 @@ JQBolt 是一款基于 迅雷Bolt界面引擎 的Lua框架，其设计借鉴了 
 	一行调用，实现全部动画
 	jqbolt("#icon", self).alphachange(700, 255, 0).poschange(700, 45, 100, 45+60, 100+60, 45-30, 100-30, 45+60+30, 100+60+30);
 
-<table width=”650″ border=”0″ cellspacing=”0″ cellpadding=”0″>
-	<tr>
-		<td>动画</td>
-		<td>API函数</td>
-	</tr>
-	<tr>
-		<td>位置移动</td>
-		<td>poschange( speed, startleft, starttop, startright, startbottom, endleft, endtop, endright, endbottom, func )</td>
-	</tr＞
-	<tr>
-		<td>透明度改变</td>
-		<td>alphachange( speed, startalpha, endalpha, func )</td>
-	</tr＞
-	<tr>
-		<td>角度动画</td>
-		<td>anglechange( speed, startrangeX, startrangeY, startrangeZ, endrangeX, endrangeY, endrangeZ, func )</td>
-	</tr＞
-	<tr>
-		<td>mask动画</td>
-		<td>maskchange( speed, startX, startY, startWidth, startHeight, endX, endY, endWidth, endHeight, func )</td>
-	</tr＞
-	<tr>
-		<td>序列动画</td>
-		<td>seqframechange( speed, objImage, strResID, func )</td>
-	</tr＞
-	<tr>
-		<td>旋转动画</td>
-		<td>turnobjectchange( speed, objImage, func )</td>
-	</tr＞
-</table>
+| 动画 |   API函数 | 
+|---------|--------|
+| 位置移动 |   poschange( speed, startleft, starttop, startright, startbottom, endleft, endtop, endright, endbottom, func ) | 
+| 透明度改变 |   alphachange( speed, startalpha, endalpha, func ) | 
+| 角度动画 |   anglechange( speed, startrangeX, startrangeY, startrangeZ, endrangeX, endrangeY, endrangeZ, func ) | 
+| mask动画 |   maskchange( speed, startX, startY, startWidth, startHeight, endX, endY, endWidth, endHeight, func ) | 
+| 序列动画 |   seqframechange( speed, objImage, strResID, func ) | 
+| 旋转动画 |   turnobjectchange( speed, objImage, func ) | 
 
 # 项目目标 #
 
