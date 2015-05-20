@@ -21,7 +21,19 @@ JQBolt 是一款基于 迅雷Bolt界面引擎 的Lua框架，其设计借鉴了 
 	
 | 选择器 |   概述 |   示例  | 
 |---------|--------|--------|
-| #</td> |   根据对象ID选择 |   jqbolt("#button", self)  | 
+| # |   根据对象ID选择 |   jqbolt("#button", self)  | 
+| > |   选择子对象 |   jqbolt("#button > *"，self)  | 
+| 空格 |   选择后代对象 |   jqbolt("#button *"，self)  | 
+| ~ |   选择兄弟对象 |   jqbolt("#button ~ *"，self)  | 
+| Bolt对象类名 |   根据类型匹配对象 |   jqbolt("#button > LayoutObject"，self)  | 
+| * |   匹配所有类型对象 |   jqbolt("#button > *"，self)  | 
+| :even |   匹配所有索引值为偶数的元素 |   jqbolt("#button ~ LayoutObject:even"，self)  | 
+| :odd |   匹配所有索引值为奇数的元素 |   jqbolt("#button ~ LayoutObject:odd"，self)  | 
+| :gt |   匹配所有大于给定索引值的元素 |   jqbolt("#button ~ LayoutObject:gt(1)"，self)  | 
+| :lt |   匹配所有小于给定索引值的元素 |   jqbolt("#button ~ LayoutObject:lt(5)"，self)  | 
+| :eq |   匹配一个给定索引值的元素 |   jqbolt("#button ~ LayoutObject:eq(1)"，self)  | 
+| :hidden |   匹配所有不可见元素 |   jqbolt("#button ~ LayoutObject:hidden"，self)  | 
+| :visible |   匹配所有可见元素 |   jqbolt("#button ~ LayoutObject:visible"，self)  | 
 
 ### 链式调用 ###
 
