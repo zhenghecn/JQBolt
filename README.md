@@ -54,7 +54,45 @@ JQBolt 是一款基于 迅雷Bolt界面引擎 的Lua框架，其设计借鉴了 
 		do more
 	end);
 
-
+| JQBolt API | Bolt API |
+|---------|--------|
+| onabsposchange | OnAbsPosChange |
+| onbind | OnBind |
+| onchar | OnChar |
+| oncontrolfocuschange | OnControlFocusChange |
+| oncontrolmouseenter | OnControlMouseEnter |
+| oncontrolmouseleave | OnControlMouseLeave |
+| oncontrolmousewheel | OnControlMouseWheel |
+| ondestroy | OnDestroy |
+| ondragenter | OnDragEnter |
+| ondragleave | OnDragLeave |	
+| ondragover | OnDragOver |	
+| ondragquery | OnDragQuery |
+| ondrop | OnDrop |	
+| onenablechange | OnEnableChange |
+| onfocuschange | OnFocusChange |	
+| onhittest | OnHitTest |	
+| onhotkey | OnHotKey |	
+| oninitcontrol | OnInitControl |	
+| onkeydown | OnKeyDown |	
+| onkeyup | OnKeyUp |	
+| onlbuttondbclick | OnLButtonDbClick |	
+| onlbuttondown | OnLButtonDown |	
+| onlbuttonup | OnLButtonUp |	
+| onmbuttondbclick | OnMButtonDbClick |	
+| onmbuttondown | OnMButtonDown |	
+| onmbuttonup | OnMButtonUp |
+| onmouseenter | OnMouseEnter |
+| onmousehover | OnMouseHover |
+| onmouseleave | OnMouseLeave |
+| onmousemove | OnMouseMove |
+| onmousewheel | OnMouseWheel |
+| onposchange | OnPosChange |
+| onrbuttondbclick | OnRButtonDbClick |
+| onrbuttondown | OnRButtonDown |
+| onrbuttonup | OnRButtonUp |
+| ontabbed | OnTabbed |
+| onvisiblechange | OnVisibleChange |
 
 ### 全局数据存取封装 ###
 
