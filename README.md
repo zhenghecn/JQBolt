@@ -7,6 +7,7 @@ JQBolt 是一款基于 迅雷Bolt界面引擎 的Lua框架，其设计借鉴了 
 - 官网：https://github.com/zhenghecn/JQBolt/
 - 开源协议：与Lua一样，使用MIT许可协议
 - 功能：文档对象选择、链式调用、事件绑定的前后端分离、全局数据存取封装、位置快捷设置、动画效果
+- JQBolt EasyUI：[https://github.com/zhenghecn/JQBolt-EasyUI](https://github.com/zhenghecn/JQBolt-EasyUI)
 
 # 快速入门 #
 ### 引用简单，不对原有代码产生影响 ###
@@ -148,8 +149,8 @@ JQBolt 是一款基于 迅雷Bolt界面引擎 的Lua框架，其设计借鉴了 
 # 项目目标 #
 
 - 支持更强大的文档选择器
-- 通过对事件的绑定封装，支持代码性能分析
-- 通过使用JQBolt，实现Bolt的基础控件集
+- 支持更快捷的对象动态操作
+- 基于JQBolt，建立Bolt的基础控件集JQBolt EasyUI
 
 # 交流 #
  
